@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore src/CSharp/CopilotDemo.sln
+
+      - name: Build
+        run: dotnet build src/CSharp/CopilotDemo.sln --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test src/CSharp/CopilotDemo.sln --configuration Release --no-build --verbosity normal
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies for JavaScript
+        run: npm install
+        working-directory: src/JavaScript
+
+      - name: Run JavaScript tests
+        run: npm test
+        working-directory: src/JavaScript

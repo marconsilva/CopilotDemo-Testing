@@ -1,0 +1,20 @@
+{
+  "name": "copilot-demo-testing",
+  "version": "1.0.0",
+  "description": "A project demonstrating GitHub Copilot features for generating tests in C# and JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^27.0.0",
+    "eslint": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
